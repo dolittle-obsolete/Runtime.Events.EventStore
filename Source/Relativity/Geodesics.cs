@@ -62,7 +62,7 @@ namespace Dolittle.Runtime.Events.Relativity.EventStore
 
         string GetStreamForEventHorizonKey(EventHorizonKey key)
         {
-            return $"{_streamPrefix}/geodesics/{key}";
+            return $"{_streamPrefix}-geodesics-{key}";
         }
 
         EventData CreateEventHorizonOffsetEvent(EventHorizonKey key, ulong offset)

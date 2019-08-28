@@ -146,7 +146,7 @@ namespace Dolittle.Runtime.Events.Store.EventStore
 
         string GetStreamForCommit()
         {
-            return $"{_streamPrefix}/events";
+            return $"{_streamPrefix}-events";
         }
 
         IEnumerable<ResolvedEvent> FetchAllEvents()

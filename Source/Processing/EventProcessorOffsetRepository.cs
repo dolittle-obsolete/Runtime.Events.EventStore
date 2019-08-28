@@ -61,7 +61,7 @@ namespace Dolittle.Runtime.Events.Processing.EventStore
 
         string GetStreamForEventProcessorId(EventProcessorId eventProcessorId)
         {
-            return $"{_streamPrefix}/offsets/{eventProcessorId}";
+            return $"{_streamPrefix}-offsets-{eventProcessorId}";
         }
 
         EventData CreateCommittedEventVersionEvent(CommittedEventVersion committedEventVersion)
