@@ -12,9 +12,9 @@ namespace Dolittle.Runtime.Events.EventStore
     public class EventStoreConfiguration
     {
         /// <summary>
-        /// Gets or sets the EventStore server address (IP or DNS record)
+        /// 
         /// </summary>
-        public string Server { get; set; }
+        public string ConnectionString { get; set; }
 
         /// <summary>
         /// Gets or sets the instance id of the event store in the EventStore server

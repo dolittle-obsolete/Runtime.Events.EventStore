@@ -3,7 +3,11 @@
  *  Licensed under the MIT License. See LICENSE in the project root for license information.
  * --------------------------------------------------------------------------------------------*/
 
+using System;
+using Dolittle.Runtime.Events.EventStore;
 using Dolittle.Runtime.Events.Store;
+using Dolittle.Serialization.Json;
+using EventStore.ClientAPI;
 
 namespace Dolittle.Runtime.Events.Processing.EventStore
 {
@@ -12,22 +16,66 @@ namespace Dolittle.Runtime.Events.Processing.EventStore
     /// </summary>
     public class EventProcessorOffsetRepository : IEventProcessorOffsetRepository
     {
+        readonly IEventStoreConnection _connection;
+        readonly ISerializer _serializer;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="connector"></param>
+        /// <param name="serializer"></param>
+        public EventProcessorOffsetRepository(EventStoreConnector connector, ISerializer serializer)
+        {
+            _connection = connector.Connection;
+            _serializer = serializer;
+        }
+
         /// <inheritdoc />
         public void Dispose()
         {
-            throw new System.NotImplementedException();
+            // TODO: Should we do anything here?
         }
 
         /// <inheritdoc />
         public CommittedEventVersion Get(EventProcessorId eventProcessorId)
         {
-            throw new System.NotImplementedException();
+            var result = _connection.ReadEventAsync(GetStreamForEventProcessorId(eventProcessorId), StreamPosition.End, true).Result;
+            if (result.Event.HasValue)
+            {
+                return _serializer.FromJsonBytes<CommittedEventVersion>(result.Event.Value.Event.Data);
+            }
+            else
+            {
+                return CommittedEventVersion.None;
+            }
         }
 
         /// <inheritdoc />
         public void Set(EventProcessorId eventProcessorId, CommittedEventVersion committedEventVersion)
         {
-            throw new System.NotImplementedException();
+            _connection.AppendToStreamAsync(
+                GetStreamForEventProcessorId(eventProcessorId),
+                ExpectedVersion.Any,
+                CreateCommittedEventVersionEvent(committedEventVersion)
+            ).Wait();
+        }
+
+
+
+        string GetStreamForEventProcessorId(EventProcessorId eventProcessorId)
+        {
+            return eventProcessorId.ToString();
+        }
+
+        EventData CreateCommittedEventVersionEvent(CommittedEventVersion committedEventVersion)
+        {
+            return new EventData(
+                Guid.NewGuid(),
+                "EventProcessorOffset",
+                true,
+                _serializer.ToJsonBytes(committedEventVersion),
+                Array.Empty<byte>()
+            );
         }
     }
 }

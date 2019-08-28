@@ -9,8 +9,9 @@
   <Import Project="../Build/MSBuild/default.props"></Import>
 
   <ItemGroup>
-    <PackageReference  Include="Dolittle.Runtime.Events" Version="3.*" />
-    <PackageReference  Include="Dolittle.ResourceTypes.Configuration" Version="3.*" />
+    <PackageReference Include="Dolittle.Runtime.Events" Version="3.*" />
+    <PackageReference Include="Dolittle.ResourceTypes.Configuration" Version="3.*" />
+    <PackageReference Include="EventStore.Client" Version="5.0.2" />
   </ItemGroup>
 
 </Project>

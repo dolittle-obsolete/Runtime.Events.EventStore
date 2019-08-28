@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="../Build/MSBuild/specs.props"></Import>
+
+  <PropertyGroup>
+    <TargetFramework>net471</TargetFramework>
+    <AssemblyName>Dolittle.Runtime.Events.EventStore.Specs</AssemblyName>
+    <RootNamespace>Dolittle.Runtime.Events.EventStore.Specs</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="./Specs/**/*.cs" Exclude="./Specs/obj/**/*.cs;./Specs/bin/**/*.cs"/>
+  </ItemGroup>
+  
+  <ItemGroup>
+    <ProjectReference Include="../Source/Runtime.Events.EventStore.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="EventStore.Client.Embedded" Version="5.0.2" />
+  </ItemGroup>
+</Project>

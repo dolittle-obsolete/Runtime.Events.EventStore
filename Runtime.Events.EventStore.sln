@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.26124.0
 MinimumVisualStudioVersion = 15.0.26124.0
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Runtime.Events.EventStore", "Source\Runtime.Events.EventStore.csproj", "{9547687E-069A-47A3-951F-31F1034C80E4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Runtime.Events.EventStore.Specs", "Specifications\Runtime.Events.EventStore.Specs.csproj", "{B217D554-37F5-4F4F-A421-5439AB119454}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,5 +32,17 @@ Global
 		{9547687E-069A-47A3-951F-31F1034C80E4}.Release|x64.Build.0 = Release|Any CPU
 		{9547687E-069A-47A3-951F-31F1034C80E4}.Release|x86.ActiveCfg = Release|Any CPU
 		{9547687E-069A-47A3-951F-31F1034C80E4}.Release|x86.Build.0 = Release|Any CPU
+		{B217D554-37F5-4F4F-A421-5439AB119454}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B217D554-37F5-4F4F-A421-5439AB119454}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B217D554-37F5-4F4F-A421-5439AB119454}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{B217D554-37F5-4F4F-A421-5439AB119454}.Debug|x64.Build.0 = Debug|Any CPU
+		{B217D554-37F5-4F4F-A421-5439AB119454}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{B217D554-37F5-4F4F-A421-5439AB119454}.Debug|x86.Build.0 = Debug|Any CPU
+		{B217D554-37F5-4F4F-A421-5439AB119454}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B217D554-37F5-4F4F-A421-5439AB119454}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B217D554-37F5-4F4F-A421-5439AB119454}.Release|x64.ActiveCfg = Release|Any CPU
+		{B217D554-37F5-4F4F-A421-5439AB119454}.Release|x64.Build.0 = Release|Any CPU
+		{B217D554-37F5-4F4F-A421-5439AB119454}.Release|x86.ActiveCfg = Release|Any CPU
+		{B217D554-37F5-4F4F-A421-5439AB119454}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
