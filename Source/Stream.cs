@@ -3,22 +3,25 @@
  *  Licensed under the MIT License. See LICENSE in the project root for license information.
  * --------------------------------------------------------------------------------------------*/
 
+using Dolittle.Concepts;
 
 namespace Dolittle.Runtime.Events.EventStore
 {
     /// <summary>
-    /// Represents a resource configuration for the EventStore event store implementation
+    /// 
     /// </summary>
-    public class EventStoreConfiguration
+    public class Stream : ConceptAs<string>
     {
         /// <summary>
-        /// E.g. "ConnectTo=tcp://localhost:1113"
+        /// Instantiates a new instance of <see cref="Stream" /> with the stream
         /// </summary>
-        public string ConnectionString { get; set; }
-
+        /// <param name="value"></param>
+        public Stream(string value) => Value = value;
+    
         /// <summary>
-        /// Gets or sets the instance id of the event store in the EventStore server
+        /// An implicit conversion from <see cref="string" /> to <see cref="Stream" />
         /// </summary>
-        public string Instance { get; set; }
+        /// <param name="value"></param>
+        public static implicit operator Stream(string value) => new Stream(value);
     }
 }

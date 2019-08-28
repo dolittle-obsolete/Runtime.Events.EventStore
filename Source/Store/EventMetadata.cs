@@ -3,22 +3,32 @@
  *  Licensed under the MIT License. See LICENSE in the project root for license information.
  * --------------------------------------------------------------------------------------------*/
 
+using Events = Dolittle.Events;
 
-namespace Dolittle.Runtime.Events.EventStore
+namespace Dolittle.Runtime.Events.Store.EventStore
 {
     /// <summary>
-    /// Represents a resource configuration for the EventStore event store implementation
+    /// 
     /// </summary>
-    public class EventStoreConfiguration
+    public class EventMetadata
     {
         /// <summary>
-        /// E.g. "ConnectTo=tcp://localhost:1113"
+        /// 
         /// </summary>
-        public string ConnectionString { get; set; }
+        public EventMetadata(Events.EventMetadata @event, CommitMetadata commit)
+        {
+            Event = @event;
+            Commit = commit;
+        }
 
         /// <summary>
-        /// Gets or sets the instance id of the event store in the EventStore server
+        /// 
         /// </summary>
-        public string Instance { get; set; }
+        public Events.EventMetadata Event { get; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public CommitMetadata Commit { get; }
     }
 }

@@ -30,11 +30,7 @@ namespace Dolittle.Runtime.Events.EventStore
         public EventStoreConnector(IConfigurationFor<EventStoreConfiguration> configuration)
         {
             _configuration = configuration.Instance;
-
-            //var settings = ConnectionSettings.Create();
-            //var cluster = ClusterSettings.Create();
-
-            _connection = EventStoreConnection.Create("ConnectTo=tcp://localhost:1113");
+            _connection = EventStoreConnection.Create(_configuration.ConnectionString);
             _connectTask = _connection.ConnectAsync();
         }
 
@@ -49,6 +45,15 @@ namespace Dolittle.Runtime.Events.EventStore
                 _connectTask.Wait();
                 return _connection;
             }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <value></value>
+        public string Instance
+        {
+            get => _configuration.Instance;
         }
     }
 }

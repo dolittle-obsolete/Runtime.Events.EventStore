@@ -5,6 +5,8 @@
 
 using System.IO;
 using System.Text;
+using Dolittle.Collections;
+using Dolittle.PropertyBags;
 using Dolittle.Serialization.Json;
 
 namespace Dolittle.Runtime.Events.EventStore
@@ -38,6 +40,20 @@ namespace Dolittle.Runtime.Events.EventStore
         {
             var json = Encoding.UTF8.GetString(data);
             return serializer.FromJson<T>(json, options);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="serializer"></param>
+        /// <param name="data"></param>
+        /// <param name="options"></param>
+        /// <returns></returns>
+        public static PropertyBag PropertyBagFromJsonBytes(this ISerializer serializer, byte[] data, ISerializationOptions options = null)
+        {
+            var json = Encoding.UTF8.GetString(data);
+            var dict = serializer.GetKeyValuesFromJson(json);
+            return new PropertyBag(new NullFreeDictionary<string,object>(dict));
         }
     }
 }

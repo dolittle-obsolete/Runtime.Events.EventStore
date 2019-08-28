@@ -18,6 +18,7 @@ namespace Dolittle.Runtime.Events.Processing.EventStore
     {
         readonly IEventStoreConnection _connection;
         readonly ISerializer _serializer;
+        readonly string _streamPrefix;
 
         /// <summary>
         /// 
@@ -26,6 +27,7 @@ namespace Dolittle.Runtime.Events.Processing.EventStore
         /// <param name="serializer"></param>
         public EventProcessorOffsetRepository(EventStoreConnector connector, ISerializer serializer)
         {
+            _streamPrefix = $"{connector.Instance}";
             _connection = connector.Connection;
             _serializer = serializer;
         }
@@ -44,10 +46,7 @@ namespace Dolittle.Runtime.Events.Processing.EventStore
             {
                 return _serializer.FromJsonBytes<CommittedEventVersion>(result.Event.Value.Event.Data);
             }
-            else
-            {
-                return CommittedEventVersion.None;
-            }
+            return CommittedEventVersion.None;
         }
 
         /// <inheritdoc />
@@ -60,11 +59,9 @@ namespace Dolittle.Runtime.Events.Processing.EventStore
             ).Wait();
         }
 
-
-
         string GetStreamForEventProcessorId(EventProcessorId eventProcessorId)
         {
-            return eventProcessorId.ToString();
+            return $"{_streamPrefix}/offsets/{eventProcessorId}";
         }
 
         EventData CreateCommittedEventVersionEvent(CommittedEventVersion committedEventVersion)
